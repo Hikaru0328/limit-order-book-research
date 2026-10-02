@@ -1,0 +1,17 @@
+[build-system]
+requires = ["setuptools>=68"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "limit-order-book-research"
+version = "0.1.0"
+description = "Synthetic queue depletion, partial-observation memory, and LOB filtering benchmarks"
+readme = "README.md"
+requires-python = ">=3.11"
+dependencies = ["numpy>=1.26,<3", "scipy>=1.13,<2"]
+
+[project.optional-dependencies]
+research = ["matplotlib>=3.7,<4", "pandas>=2,<3", "nbformat>=5.10,<6", "nbclient>=0.10,<1", "ipykernel>=6,<8"]
+
+[tool.setuptools.packages.find]
+where = ["src"]

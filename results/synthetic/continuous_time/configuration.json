@@ -1,0 +1,38 @@
+{
+  "parameters": {
+    "cap": 8,
+    "refill": 4,
+    "lam": 2.0,
+    "mu": 1.0,
+    "theta": 0.25,
+    "kappa": 0.2,
+    "beta": 0.5,
+    "tick": 1.0,
+    "spread": 1.0
+  },
+  "betas": [
+    0.0,
+    0.5,
+    1.0
+  ],
+  "kappas": [
+    0.02,
+    0.2,
+    2.0
+  ],
+  "horizons": [
+    1.0,
+    4.0,
+    16.0
+  ],
+  "replicas": 16,
+  "duration": 1024.0,
+  "observation_interval": 2.0,
+  "burn_in_rule": "max(50, 10/(2*kappa))",
+  "seed_rule": "202610010000 + 100*case_index + replica",
+  "history": "from stationary t=0; burn-in excluded from scoring, finite past retained",
+  "learning": "none; all parameters known",
+  "numpy": "1.26.0",
+  "scipy": "1.13.1",
+  "python": "3.12.0"
+}

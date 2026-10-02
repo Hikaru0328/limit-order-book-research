@@ -1,0 +1,86 @@
+{
+  "status": "passed",
+  "summary_max_error": 0.0,
+  "clock_errors": {
+    "generator_max_error": 0.0,
+    "stationary_max_error": 1.5057399771478686e-15,
+    "transition_max_error": 0.0,
+    "price_mean_max_error": 0.0,
+    "price_second_max_error": 0.0
+  },
+  "matrix_exponential_max_error": 8.07340305719606e-15,
+  "null_entropy_max_error": 0.0,
+  "replayed_paths": 2,
+  "replayed_prediction_cells": 30,
+  "replay_max_error": 2.7755575615628914e-17,
+  "stochastic_diagnostics": {
+    "entropy_calibration_max_se": 1.8827168416067903,
+    "projection_identity_max_se": 2.450038192074783,
+    "realized_risk_identity_max_se": 2.821431123722112
+  },
+  "initial_belief_sensitivity": [
+    {
+      "beta": 0.5,
+      "kappa": 0.2,
+      "arm": "price",
+      "max_posterior_difference": 0.0
+    },
+    {
+      "beta": 0.5,
+      "kappa": 0.2,
+      "arm": "queue_price",
+      "max_posterior_difference": 0.0
+    },
+    {
+      "beta": 0.5,
+      "kappa": 0.2,
+      "arm": "marked",
+      "max_posterior_difference": 0.0
+    },
+    {
+      "beta": 1.0,
+      "kappa": 0.02,
+      "arm": "price",
+      "max_posterior_difference": 0.0
+    },
+    {
+      "beta": 1.0,
+      "kappa": 0.02,
+      "arm": "queue_price",
+      "max_posterior_difference": 0.0
+    },
+    {
+      "beta": 1.0,
+      "kappa": 0.02,
+      "arm": "marked",
+      "max_posterior_difference": 0.0
+    }
+  ],
+  "independent_paths": 144,
+  "prediction_rows": 2160,
+  "filter_rows": 720,
+  "source_hashes": {
+    "src/ct_lob/__init__.py": "53cbabbf94ed8fa66a1d788576ef5091bc4384c1b88de883e89e33bd724d2604",
+    "src/ct_lob/evaluation.py": "43e1d42f213c0256cb9748bdcade8427b130568e0256785cca6d558cec7113ea",
+    "src/ct_lob/filtering.py": "b85bb4c40c2446289db27f07f2ed0733f6887d0bc6ca1d4bf3be49bad4294055",
+    "src/ct_lob/model.py": "0156a26d0a0f07e50bd585820ebc1a66bf90e5409a32c77d76eef3313dcd5754",
+    "tests/continuous_time_checks/__init__.py": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "tests/continuous_time_checks/test_ct_lob.py": "df4cb180341dfd1c11cb0c5d37d74dee98824ddcf762b1b2ed2bab8ac3ec9247",
+    "studies/continuous_time_lob/experiments/01_baseline/audit.py": "49a501522dfc81b50e58b7f07c30dbd27b359aaff8e77234d581d167d0ef6ec9",
+    "studies/continuous_time_lob/experiments/01_baseline/plot.py": "4ae35a076f8327f4aecbbf388fe7a564fbe78b9b2f07cbaac5df2d45a1cbc703",
+    "studies/continuous_time_lob/experiments/01_baseline/run.py": "39edb4d9b22d61be8e045ce749fe6bf6cf6051f50e75c8a94a4b2cda272917e5"
+  },
+  "result_hashes": {
+    "clock_controls.csv": "95e724c4c33b463eccf12a2e12c14520d6370a42c39d9faecbd7369e00e7bdc6",
+    "example_posteriors.csv": "bdbb0976dd053c6de943646270da722bc172fbd214454683364bb12c16dbd6f4",
+    "filter_runs.csv": "587803f51311e1036f1944cafcbcd3f9da0c3a0a3e95b6edc297b0eb32809c1e",
+    "filter_summary.csv": "074182d2d3f6a8e57cbcf4507ca29b904103f8b7ffed7673ebd08920846467fa",
+    "numerics.csv": "2300e34afb5871930c888f100b9c986d45bc867b43a84bea7b7e11176e09aee2",
+    "paired_runs.csv": "65e8e78d7b94c1186cc9baa66ab16672e924251d1a44c4337ddd17ab716accf4",
+    "paired_summary.csv": "1e25f27979f5c93d17222894ed71411a934bbd61317c7036d82de54cdc4a9dd7",
+    "population.csv": "a5a190691e4b9d485890c23df6098e5771d6c78cd2b695f18a943b94dc6ab1b4",
+    "prediction_runs.csv": "43409b822f496d069a1ef218e2300ef961fc2460c69730221692bfa1243c5e09",
+    "prediction_summary.csv": "07c18661fe609b54217bde2366ef8f5ac09d405f4a3835440e1ed345f17366d4",
+    "seeds.csv": "1df21f8eb8fe6db2e51bd8f0fdec1da1110ba2821f3c83581a71a34092825482"
+  }
+}

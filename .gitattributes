@@ -1,0 +1,3 @@
+*.svg -whitespace
+*.csv -whitespace
+*.ipynb -whitespace

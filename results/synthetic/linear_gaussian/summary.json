@@ -1,0 +1,31 @@
+{
+  "seed_count": 5,
+  "training_events": 65536,
+  "test_events": 32768,
+  "scales": [
+    1,
+    2,
+    4,
+    8,
+    16
+  ],
+  "history_events": 32,
+  "fixed_target_events": 16,
+  "max_population_identity_error": 1.7763568394002505e-15,
+  "ar1_b4_memory": {
+    "endpoint": 3.5941000176009644e-17,
+    "mean": 0.10195451850980594
+  },
+  "convergence_mean_rmse": {
+    "4096": 0.006938476463177079,
+    "16384": 0.0037872209026353783,
+    "65536": 0.001975191395424728
+  },
+  "notes": [
+    "Finite memory sums use the same 32-event predictor gap, not infinite memory.",
+    "Seed bands describe repeated simulations, not confidence intervals for market data.",
+    "One-block targets differ across scales; fixed-events holds endpoint separation only.",
+    "VAR coefficients are prediction baselines, not Mori coefficients.",
+    "Full-state means can have memory although full-state endpoints are Markov."
+  ]
+}
