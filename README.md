@@ -7,6 +7,20 @@ controls. It asks when a queue depletes, which side moves price first, and what
 predictive information is lost when the full state is only partially observed.
 All data are synthetic. No market calibration or trading profitability is claimed.
 
+## Core aims
+
+- **Understand what price history adds to prediction.** Determine when past price
+  movements improve inference of the current market state and prediction of its
+  future evolution, beyond what is available from current order-book observations.
+- **Characterize effective memory through coarse-graining.** Examine how the
+  strength, timescales and structure of memory change as observations are compressed
+  or aggregated over longer event windows. Distinguish memory caused by partial
+  observation or a limited representation from dependence in the underlying dynamics.
+
+Together, these aims connect the information retained from the past to its
+predictive value. A nonzero memory kernel alone does not establish a forecasting
+advantage; the two must be evaluated separately in controlled synthetic models.
+
 ## Read in 5–10 minutes
 
 | Question | Main finding within the model | Start here |
