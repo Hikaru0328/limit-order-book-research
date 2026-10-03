@@ -20,3 +20,9 @@ can distinguish them.
 Queue imbalance is (bid quantity - ask quantity)/(bid quantity + ask quantity).
 Do not identify this observable with the full state or with a calibrated price
 probability. Time aggregation can create effective memory even from Markov dynamics.
+
+The [finite-LOB projection bridge](../studies/memory_and_prediction/experiments/finite_lob_bridge/README.md)
+uses only the existing queue chain, without hidden flow. Its Polynomial coordinates
+contain both queue sizes; remaining linear Mori memory reflects an incomplete
+function span, not missing endpoint-state information. Complete indicators provide
+the null control.

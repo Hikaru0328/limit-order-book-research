@@ -14,6 +14,7 @@ All data are synthetic. No market calibration or trading profitability is claime
 | Which queue depletes first? | Queue sizes and consumption rates determine directional probability; direction and waiting time can be dependent. | [Queue-race notebook](studies/queue_depletion/notebooks/queue_race.ipynb) |
 | Does higher activity imply higher volatility? | Alternating jumps can have high quadratic variation but bounded price dispersion. | [Jump-dependence notebook](studies/queue_depletion/notebooks/toy_volatility.ipynb) |
 | Why can an observed process need history? | Partial observation and time aggregation can create effective memory even when the full dynamics are Markov. | [Memory benchmark](studies/memory_and_prediction/README.md) |
+| Does the same mechanism occur in a queue model? | A compressed finite-LOB projection has population memory; the complete endpoint basis is a numerical null. | [Finite-LOB bridge](studies/memory_and_prediction/experiments/finite_lob_bridge/README.md) |
 | What information does an event stream retain? | Known-parameter filtering compares event marks, queue/price history and current queues against a full-state oracle. | [Continuous-time baseline](studies/continuous_time_lob/README.md) |
 
 ### Queue races: covariance matters
@@ -62,8 +63,10 @@ No external data service or credentials are needed.
 
 - [Queue depletion](studies/queue_depletion/README.md): first passage, censoring,
   cancellation, market consumption, replenishment and bid/ask races.
-- [Memory and prediction](studies/memory_and_prediction/README.md): linear controls,
-  finite-state LOB moments, queue imbalance and fixed-horizon prediction drivers.
+- [Controlled coarse-graining benchmark](studies/memory_and_prediction/README.md):
+  linear-Gaussian methodological controls for projection and aggregation.
+- [Finite-LOB projection bridge](studies/memory_and_prediction/experiments/finite_lob_bridge/README.md):
+  the same memory question in a Markov queue model, using exact population quantities.
 - [Continuous-time LOB](studies/continuous_time_lob/README.md): generator, simulation
   and causal filtering with known parameters.
 - [Assumptions](docs/model_assumptions.md), [limitations](docs/validation_and_limitations.md),

@@ -1,0 +1,71 @@
+{
+  "status": "passed",
+  "model": "existing finite queue chain; no hidden state",
+  "cap": 8,
+  "states": 64,
+  "scales": [
+    1,
+    2,
+    4,
+    8,
+    16
+  ],
+  "population_only": true,
+  "seed_independence_identical": true,
+  "null_tolerance": 1e-11,
+  "identity_tolerance": 1e-10,
+  "stationary_tolerance": 1e-13,
+  "memory_tail_tolerance": 1e-10,
+  "event_horizon_interval_tolerance": 1e-07,
+  "controls": {
+    "row_sum_error": 0.0,
+    "stationary_normalization_error": 1.1102230246251565e-16,
+    "stationarity_error": 8.673617379884035e-17,
+    "minimum_probability": 0.0,
+    "minimum_stationary_mass": 0.003007674460316236,
+    "block_checks": [
+      {
+        "b": 1,
+        "block_transition_error": 0.0
+      },
+      {
+        "b": 2,
+        "block_transition_error": 0.0
+      },
+      {
+        "b": 4,
+        "block_transition_error": 2.7755575615628914e-17
+      },
+      {
+        "b": 8,
+        "block_transition_error": 2.7755575615628914e-17
+      },
+      {
+        "b": 16,
+        "block_transition_error": 4.163336342344337e-17
+      }
+    ]
+  },
+  "baseline_nonzero": true,
+  "ordering_supported_b1": true,
+  "ordering_by_scale": {
+    "1": true,
+    "2": true,
+    "4": true,
+    "8": true,
+    "16": true
+  },
+  "complete_max_lag_norm": 3.8665111889792727e-16,
+  "complete_max_covariance_recursion_sum_32": 1.2557584927028825e-14,
+  "complete_max_strength_upper_bound": 3.8665111889792747e-16,
+  "max_direct_recursion_error": 2.4939785208798887e-12,
+  "max_factor_recursion_error": 2.4939734522347323e-12,
+  "python_float": "float64",
+  "numpy": "1.26.0",
+  "caveats": [
+    "Geometric tail bounds exclude roundoff.",
+    "Null-basis horizon ratios remain in CSV but are flagged unresolved; they are not plotted.",
+    "Feature expansion need not generally reduce this metric.",
+    "No sampled coefficients or VAR fits enter headline figures."
+  ]
+}
