@@ -16,6 +16,10 @@ All data are synthetic. No market calibration or trading profitability is claime
   strength, timescales and structure of memory change as observations are compressed
   or aggregated over longer event windows. Distinguish memory caused by partial
   observation or a limited representation from dependence in the underlying dynamics.
+- **Progress from controlled models to real order books.** Start with controlled
+  synthetic models to isolate the effects of coarse-graining. The long-term goal
+  is to apply and evaluate the approach using real-market limit-order-book data;
+  empirical validation remains future work.
 
 Together, these aims connect the information retained from the past to its
 predictive value. A nonzero memory kernel alone does not establish a forecasting
