@@ -130,7 +130,7 @@ are $BC_0=E[fY^\top]$, so the minimizer is precisely the coefficient above.
 With the stationary $L^2$ inner product this is the orthogonal projection onto
 
 ```math
-\mathcal S=\operatorname{span}\{Y_1,\ldots,Y_d\}.
+\mathcal S=\mathrm{span}\{Y_1,\ldots,Y_d\}.
 ```
 
 It obeys $\mathcal P^2=\mathcal P$, $\mathcal Q^2=\mathcal Q$,
@@ -148,7 +148,7 @@ functions, one would also retain an intercept or a constant basis function.
 
 “Unresolved” can mean missing microscopic coordinates, or missing functions of
 coordinates that are already known. For example, retaining a quantity $N$ does
-not put every function of $N$ in $\operatorname{span}\{N\}$. A conditional-expectation
+not put every function of $N$ in $\mathrm{span}\{N\}$. A conditional-expectation
 projection $E[f\mid Y]$ instead allows all square-integrable functions of $Y$;
 it is generally different from the finite linear Mori projection used here.
 The Polynomial versus Complete comparison tests exactly this distinction.
@@ -331,7 +331,7 @@ Y_{t+1}=A_0Y_t+A_1Y_{t-1}+\cdots+A_{p-1}Y_{t-p+1}+\epsilon_{t+1}.
 Its predictor space contains all components of the lag-augmented vector,
 
 ```math
-\operatorname{span}\{Y_t,Y_{t-1},\ldots,Y_{t-p+1}\}.
+\mathrm{span}\{Y_t,Y_{t-1},\ldots,Y_{t-p+1}\}.
 ```
 
 Without regularization, the optimal population residual is orthogonal to every

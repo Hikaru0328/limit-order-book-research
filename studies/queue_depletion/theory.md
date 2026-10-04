@@ -26,7 +26,7 @@ Independent resets produce iid cycle pairs (J,T), while J and T within a cycle
 may be dependent. Drift is v=E[J]/E[T]. Under the light-tail assumptions used here,
 the long-run variance rate is
 
-$$\sigma^2=\frac{\operatorname{Var}(J)+v^2\operatorname{Var}(T)-2v\operatorname{Cov}(J,T)}{E[T]}.$$
+$$\sigma^2=\frac{\mathrm{Var}(J)+v^2\mathrm{Var}(T)-2v\mathrm{Cov}(J,T)}{E[T]}.$$
 
 Omitting the covariance term can either increase or decrease the inferred rate.
 All statements refer to these synthetic assumptions; spread competition and
