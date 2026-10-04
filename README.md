@@ -1,101 +1,139 @@
 # Limit-order-book research
 
-**Synthetic experiments on queue depletion, price formation and memory under partial observation.**
+## Why this research?
 
-This portfolio connects tractable stochastic models to executable numerical
-controls. It asks when a queue depletes, which side moves price first, and what
-predictive information is lost when the full state is only partially observed.
-All data are synthetic. No market calibration or trading profitability is claimed.
+When designing an alpha strategy, how should we choose the prediction horizon?
+Once that horizon is fixed, can finer order-book dynamics reveal predictive
+information that coarse summaries miss? For example, could intraday events help
+predict a one-day price change?
 
-## Core aims
+These questions motivate this research. A daily target need not imply that daily
+observations are sufficient, and a shorter horizon need not always be easier to
+predict. The aim is to understand **which information is useful at which horizon,
+and why**.
 
-- **Understand what price history adds to prediction.** Determine when past price
-  movements improve inference of the current market state and prediction of its
-  future evolution, beyond what is available from current order-book observations.
-- **Characterize effective memory through coarse-graining.** Examine how the
-  strength, timescales and structure of memory change as observations are compressed
-  or aggregated over longer event windows. Distinguish memory caused by partial
-  observation or a limited representation from dependence in the underlying dynamics.
-- **Progress from controlled models to real order books.** Start with controlled
-  synthetic models to isolate the effects of coarse-graining. The long-term goal
-  is to apply and evaluate the approach using real-market limit-order-book data;
-  empirical validation remains future work.
+This portfolio starts with controlled synthetic models, where the generating
+process is known and numerical results can be checked against exact calculations.
+Real-market validation and strategy evaluation remain future work.
 
-Together, these aims connect the information retained from the past to its
-predictive value. A nonzero memory kernel alone does not establish a forecasting
-advantage; the two must be evaluated separately in controlled synthetic models.
+## How the questions are investigated
 
-## Read in 5–10 minutes
+The experiments distinguish three choices: how far ahead to predict, how finely
+to observe the market, and how much history to retain. They compare:
 
-| Question | Main finding within the model | Start here |
-|---|---|---|
-| Which queue depletes first? | Queue sizes and consumption rates determine directional probability; direction and waiting time can be dependent. | [Queue-race notebook](studies/queue_depletion/notebooks/queue_race.ipynb) |
-| Does higher activity imply higher volatility? | Alternating jumps can have high quadratic variation but bounded price dispersion. | [Jump-dependence notebook](studies/queue_depletion/notebooks/toy_volatility.ipynb) |
-| Why can an observed process need history? | Partial observation and time aggregation can create effective memory even when the full dynamics are Markov. | [Memory benchmark](studies/memory_and_prediction/README.md) |
-| Does the same mechanism occur in a queue model? | A compressed finite-LOB projection has population memory; the complete endpoint basis is a numerical null. | [Finite-LOB bridge](studies/memory_and_prediction/experiments/finite_lob_bridge/README.md) |
-| What information does an event stream retain? | Known-parameter filtering compares event marks, queue/price history and current queues against a full-state oracle. | [Continuous-time baseline](studies/continuous_time_lob/README.md) |
+- **Current book:** what can be predicted from the present queue sizes alone.
+- **Book + event history:** what past observations add to that prediction.
+- **Full-state oracle:** a reference that also knows the current hidden state,
+  but cannot see future events.
 
-### Queue races: covariance matters
+The target is the cumulative price change over the prediction horizon; R² measures
+the fraction of its variance explained by the predictor, using each horizon’s own
+return variance as the reference.
 
-![Queue-race variance comparison](results/synthetic/queues/queue_race.png)
+This separates the predictive value already visible in the book, the additional
+value of history, and the gap to full-state information. Model definitions,
+parameter settings, and evaluation equations are in the
+[model and measurement note](docs/horizon_model_details.md).
 
-The independent-timing comparison preserves cycle marginals but removes their
-within-cycle dependence. Omitting direction–waiting-time covariance can overstate
-or understate the regenerative variance rate. Bars compare theory and 100,000
-simulated cycles per condition, not empirical market estimates.
+## Why a renormalization-group perspective?
 
-### Memory: exact controls before prediction
+Renormalization-group methods inspired a further question: as detailed events are
+replaced by coarser observations, what survives in the effective dynamics?
+The goal is to connect changes in observation scale with changes in useful
+information and predictive time horizons.
 
-![Linear-Gaussian benchmark](results/synthetic/linear_gaussian/validation.svg)
-
-Population constructions provide independent references for estimated kernels.
-The prediction panel uses a one-block target, whose event horizon changes with
-block size; fixed-event-target results are separately recorded in the CSV.
-Mori memory coefficients are not fitted regression coefficients.
-
-### Continuous time: known-parameter information recovery
-
-![Continuous-time inference](results/synthetic/continuous_time/baseline.svg)
-
-The baseline uses 16 independent paths per model across nine parameter settings.
-Intervals describe variability across paths; filters know the synthetic parameters.
-Information-recovery ratios depend on their specified baseline and denominator.
-
-## Reproduce
-
-Python 3.11 or 3.12 is supported. From the repository root:
-
-```sh
-python -m venv .venv
-source .venv/bin/activate
-python -m pip install -e '.[research]'
-python -m unittest discover -s tests -v
-python scripts/run_notebooks.py queue_race
-```
-
-See [full reproduction commands](docs/reproduction.md),
-[recorded verification](docs/verification.md), and [result provenance](results/README.md).
-No external data service or credentials are needed.
+Mori–Zwanzig projection provides a way to describe memory introduced by removing
+detail or restricting a representation. The experiments assess that memory
+separately from forecasting gains: a nonzero memory kernel alone does not establish
+that history improves prediction. The horizon sweep below varies the prediction
+target, not observation resolution; the next question is how its predictability
+curves change when observations are made coarser. A closed RG description remains
+an open goal.
 
 ## Research map
 
-- [Queue depletion](studies/queue_depletion/README.md): first passage, censoring,
-  cancellation, market consumption, replenishment and bid/ask races.
-- [Controlled coarse-graining benchmark](studies/memory_and_prediction/README.md):
-  linear-Gaussian methodological controls for projection and aggregation.
-- [Finite-LOB projection bridge](studies/memory_and_prediction/experiments/finite_lob_bridge/README.md):
-  the same memory question in a Markov queue model, using exact population quantities.
-- [Continuous-time LOB](studies/continuous_time_lob/README.md): generator, simulation
-  and causal filtering with known parameters.
-- [Assumptions](docs/model_assumptions.md), [limitations](docs/validation_and_limitations.md),
-  [references](docs/references.md), and [data provenance](docs/data_provenance.md).
+| Study | What it contributes |
+|---|---|
+| [Queue depletion](studies/queue_depletion/README.md) | Connects queue events, depletion, and timing to price changes. |
+| [Linear-Gaussian controls](studies/memory_and_prediction/README.md) | Checks projected memory and estimation against exact references. |
+| [Finite-LOB projection](studies/memory_and_prediction/experiments/finite_lob_bridge/README.md) | Separates missing state information from a restricted linear representation. |
+| [Continuous-time LOB](studies/continuous_time_lob/README.md) | Compares current observations and histories against a full-state oracle. |
 
-## What remains open
+These are complementary controlled models, with their assumptions documented
+separately. The horizon comparison below extends the continuous-time study.
 
-Variable-spread competition, realistic order sizes and resets, estimation of
-unknown parameters, model misspecification, and replication on licensed public
-data remain future work. Closed RG equations, universal market scaling and
-profitable trading strategies are not established by these experiments.
+## What we know so far
 
-This is a curated research release, not a production matching or execution system.
-See [rights and attribution](NOTICE.md); public access does not grant an open-source license.
+The horizon sweep reveals three related findings within the tested synthetic model.
+
+![Current book, event history, and full-state oracle across prediction horizons](results/synthetic/horizon_sweep/overview.png)
+
+Columns vary hidden-direction persistence from long to short; rows vary its
+influence on order flow from weaker to stronger. All panels use the same vertical
+scale. The black dashed curve is the full-state oracle; gray uses the current book;
+pink adds event history. Stars mark oracle maxima on the tested horizon grid.
+Shading shows pointwise 95% intervals for the path-based estimates.
+The [model note](docs/horizon_model_details.md) maps Cases A–F to their settings.
+
+### 1. Some settings have an interior predictability maximum
+
+Is the shortest horizon always the most predictable, even with complete current
+information? To isolate this question from observation limits, we hold each model
+fixed and compare its full-state oracle across horizons 1–16.
+
+In Case A, oracle R² is highest at horizon 8; in Case D, at horizon 5. Other settings
+peak at the shortest tested horizon. Thus the model can have an interior maximum
+in total predictability before incomplete observation is introduced.
+
+### 2. The maximizing horizon changes with the dynamics
+
+Does hidden-state persistence alone determine that maximum? Cases A and D hold
+persistence fixed while changing how strongly the hidden direction affects order
+flow. Comparing their oracle curves removes differences in available information.
+
+The grid maximum moves from horizon 8 to 5. Hidden persistence alone therefore
+does not determine the preferred horizon. This comparison establishes a dependence
+on the model setting; explaining it through interacting timescales remains open.
+
+### 3. History can improve both the level and the horizon profile of prediction
+
+What changes when past observations are added to the current book? Within each
+model, we compare current-book and event-history predictors on the same paths,
+at the same scoring times and target horizons, with the oracle as a reference.
+
+In Case A, history raises R² and moves the maximum from around horizons 4–5 to 7.
+The gap between pink and gray shows the improvement at each horizon. History can
+therefore change both how much is predictable and which tested horizon is best.
+The remaining oracle gap includes information unavailable from those observations;
+it is not all an opportunity for a better fitted predictor.
+
+These findings concern known-parameter synthetic models and integer horizons 1–16
+in model time. They do not identify a continuous optimum or a profitable holding
+period. Some peaks are nearly flat: in Case D, the history estimates at horizons
+4 and 5 are not statistically distinguished by their paired pointwise interval.
+
+## What comes next?
+
+The next questions are how the preferred horizon changes across model conditions,
+which combinations of timescales explain that movement, and how much predictability
+survives when observations are made coarser. Unknown-parameter estimation and
+real-market data are needed to test whether the findings carry beyond these controls.
+Choosing a trading horizon additionally requires costs, turnover, and risk.
+
+## Reproduction and technical detail
+
+The [model and measurement note](docs/horizon_model_details.md) defines the horizon
+experiment, its checks, and the location of its implementation and results.
+The figure and numerical summaries of the dense sweep are included here. Its full
+implementation and path-level outputs are maintained in the private research
+repository; the public baseline reproduction does not yet regenerate this extension.
+
+For the currently published studies, see the
+[reproduction guide](docs/reproduction.md),
+[verification record](docs/verification.md),
+and [assumptions and limitations](docs/validation_and_limitations.md).
+For the projection derivation, see the
+[Mori research note](docs/mori_projection_notes.md).
+
+All included research uses synthetic data. This is a curated research portfolio;
+see [rights and attribution](NOTICE.md).
